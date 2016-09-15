@@ -1,5 +1,15 @@
 {
   "name": "creativedelta/recaptcha",
+  "type": "library",
+  "description": "PHP-ZF2 ReCAPTCHA addon",
+  "homepage": "https://github.com/GoPlan/recaptcha",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Duc-Anh Le",
+      "email": "ducanh.ke@gmail.com"
+    }
+  ],
   "version": "0.0.1",
   "repositories": [
     {
@@ -8,5 +18,10 @@
     }
   ],
   "require": {
+  },
+  "autoload": {
+    "psr-0": {
+      "recaptcha": "src"
+    }
   }
 }
