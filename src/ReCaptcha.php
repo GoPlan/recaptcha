@@ -6,21 +6,25 @@
  * Time: 6:35 PM
  */
 
-namespace ZF2ReCaptcha;
+namespace CreativeDelta\ReCaptcha;
 
 use Zend\Captcha\AbstractAdapter;
 
 class ReCaptcha extends AbstractAdapter
 {
 
-    const SERVICE_NOT_FOUND = "";
-    const PUBLICKEY_NOT_FOUND = "";
-    const PRIVATEKEY_NOT_FOUND = "";
+    const SERVICE_IS_UNDEFINED = "";
+    const MISSING_INPUT_SECRET = "missing-input-secret";
+    const INVALID_INPUT_SECRET = "invalid-input-secret";
+    const MISSING_INPUT_RESPONSE = "missing-input-response";
+    const INVALID_INPUT_RESPONSE = "invalid-input-response";
 
     protected $messageTemplates = [
-        self::SERVICE_NOT_FOUND => "",
-        self::PUBLICKEY_NOT_FOUND => "",
-        self::PRIVATEKEY_NOT_FOUND => ""
+        self::SERVICE_IS_UNDEFINED => "Service is undefined or null",
+        self::MISSING_INPUT_SECRET => "The secret parameter is missing",
+        self::INVALID_INPUT_SECRET => "The secret parameter is invalid or malformed.",
+        self::MISSING_INPUT_RESPONSE => "The response parameter is missing.",
+        self::INVALID_INPUT_RESPONSE => "The response parameter is invalid or malformed."
     ];
 
     protected $service;
@@ -28,25 +32,6 @@ class ReCaptcha extends AbstractAdapter
     public function __construct($options = null)
     {
         parent::__construct($options);
-        $this->setService(new ReCaptchaService());
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPublicKey()
-    {
-        return $this->getService()->getPublicKey();
-    }
-
-    /**
-     * @param mixed $publicKey
-     * @return $this
-     */
-    public function setPublicKey($publicKey)
-    {
-        $this->getService()->setPublicKey($publicKey);
-        return $this;
     }
 
     /**
@@ -68,10 +53,32 @@ class ReCaptcha extends AbstractAdapter
     }
 
     /**
+     * @return mixed
+     */
+    public function getPublicKey()
+    {
+        return $this->getService()->getPublicKey();
+    }
+
+    /**
+     * @param mixed $publicKey
+     * @return $this
+     */
+    public function setPublicKey($publicKey)
+    {
+        $this->getService()->setPublicKey($publicKey);
+        return $this;
+    }
+
+    /**
      * @return ReCaptchaService
      */
     public function getService()
     {
+        if (!$this->service) {
+            $this->service = new ReCaptchaService();
+        }
+
         return $this->service;
     }
 
@@ -88,8 +95,18 @@ class ReCaptcha extends AbstractAdapter
         // TODO: Implement generate() method.
     }
 
-    public function isValid($value)
+    public function isValid($value, $remoteip = null)
     {
-        // TODO: Implement isValid() method.
+        if (!$this->service) {
+            throw new \Exception("Service is null");
+        }
+
+        $response = $this->getService()->verify($value, $remoteip);
+
+        if ($response->isSuccess()) {
+
+        } else {
+
+        }
     }
 }
