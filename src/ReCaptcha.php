@@ -41,6 +41,7 @@ class ReCaptcha extends AbstractAdapter
 
     /**
      * @param mixed $publicKey
+     * @return $this
      */
     public function setPublicKey($publicKey)
     {
@@ -58,6 +59,7 @@ class ReCaptcha extends AbstractAdapter
 
     /**
      * @param mixed $privateKey
+     * @return $this
      */
     public function setPrivateKey($privateKey)
     {
