@@ -1,0 +1,12 @@
+{
+  "name": "creativedelta-recaptcha",
+  "version": "0.0.1",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": ""
+    }
+  ],
+  "require": {
+  }
+}
