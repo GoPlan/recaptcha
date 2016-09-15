@@ -88,8 +88,10 @@ class ReCaptchaService
             ];
 
             $response = $this->postRequest($params);
-            $body = $response->getBody();
-            return new ReCaptchaResponse($body);
+            $responseBody = $response->getBody();
+            $responseData = json_decode($responseBody, true);
+
+            return new ReCaptchaResponse($responseData);
 
         } catch (\Exception $ex) {
             throw $ex;

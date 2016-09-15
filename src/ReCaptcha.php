@@ -121,4 +121,9 @@ class ReCaptcha extends AbstractAdapter
             return false;
         }
     }
+
+    public function getHelperName()
+    {
+        return 'creativedelta/recaptcha';
+    }
 }
