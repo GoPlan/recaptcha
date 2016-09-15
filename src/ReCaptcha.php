@@ -45,7 +45,7 @@ class ReCaptcha extends AbstractAdapter
     public function setPublicKey($publicKey)
     {
         $this->getService()->setPublicKey($publicKey);
-        return this;
+        return $this;
     }
 
     /**
@@ -62,7 +62,7 @@ class ReCaptcha extends AbstractAdapter
     public function setPrivateKey($privateKey)
     {
         $this->getService()->setPrivateKey($privateKey);
-        return this;
+        return $this;
     }
 
     /**
