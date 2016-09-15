@@ -4,7 +4,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/GoPlan/recaptcha.git"
+      "url": "https://github.com/GoPlan/recaptcha"
     }
   ],
   "require": {
