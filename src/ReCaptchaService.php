@@ -27,7 +27,13 @@ class ReCaptchaService
     public function getHttpClient()
     {
         if (!$this->httpClient) {
-            $this->httpClient = new HttpClient();
+
+            $config = array(
+                'adapter' => 'Zend\Http\Client\Adapter\Socket',
+                'sslverifypeer' => false
+            );
+
+            $this->httpClient = new HttpClient(null, $config);
         }
 
         return $this->httpClient;
@@ -82,7 +88,8 @@ class ReCaptchaService
             ];
 
             $response = $this->postRequest($params);
-            return new ReCaptchaResponse($response->getContent());
+            $body = $response->getBody();
+            return new ReCaptchaResponse($body);
 
         } catch (\Exception $ex) {
             throw $ex;
@@ -96,19 +103,16 @@ class ReCaptchaService
      */
     protected function postRequest($params)
     {
-
         if (!$this->privateKey) {
             throw new \Exception("Private key is null");
         }
 
         $request = new HttpRequest();
-        $request->setUri(self::SERVICE_LINK);
-        $request->getPost()->fromArray($params);
-        $request->setMethod(HttpRequest::METHOD_POST);
+        $request->setUri(self::SERVICE_LINK)->setMethod(HttpRequest::METHOD_POST)->getPost()->fromArray($params);
 
         $httpClient = $this->getHttpClient();
-        $httpClient->setEncType($httpClient::ENC_URLENCODED);
+        $response = $httpClient->setEncType(HttpClient::ENC_URLENCODED)->send($request);
 
-        return $httpClient->send($request);
+        return $response;
     }
 }
