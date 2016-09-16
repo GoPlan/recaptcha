@@ -1,7 +1,7 @@
 {
   "name": "creative-delta/recaptcha",
   "type": "library",
-  "description": "PHP-ZF2 ReCAPTCHA addon",
+  "description": "A PHP ZendFramework 2.0 (ZF2) - Google ReCAPTCHA Adapter",
   "homepage": "https://github.com/GoPlan/recaptcha",
   "license": "MIT",
   "authors": [
