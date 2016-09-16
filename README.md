@@ -1,7 +1,7 @@
 # recaptcha
 A PHP ZF2 - ReCAPTCHA Adapter (Google)
 
-This recaptcha class is used as an adapter to ZF2 default CAPTCHA form element. It renders Google (clickable) ReCaptcha <div>.
+This recaptcha class is used as an adapter to ZF2 default CAPTCHA form element. It renders Google (clickable) ReCaptcha Html div tag.
 
 Two major inputs are a public key and a private key. The public key is the site key, while the private key is the secret acquired from Google.
 
